@@ -26,6 +26,16 @@ docker exec -it react npx create-react-app example
 
 This creates the files both locally and in the docker thanks to the `--volume` command above.
 
+To test building with apache deployment, you will want to run the build command and then symbolically link the built code to the apache directory: `/usr/local/apache2/htdocs`. Here are the commands for an app following the pattern initiated by create-react-app.
+
+```
+docker exec -it --workdir="/app/example" react npm run build
+docker exec -it --workdir="/usr/local/apache2" react rm -r htdocs
+docker exec -it --workdir="/usr/local/apache2" react ln -s /app/example/build htdocs
+```
+
+Then you can look at http://localhost in your browser!
+
 ## Tutorials Used
 
 - [ReactJs.org Intro to React](https://reactjs.org/tutorial/tutorial.html) (2022Jun11) creates a simple tic tac toe game in `tic-tac-toe/`
