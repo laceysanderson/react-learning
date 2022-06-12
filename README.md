@@ -38,4 +38,6 @@ Then you can look at http://localhost in your browser!
 
 ## Tutorials Used
 
-- [ReactJs.org Intro to React](https://reactjs.org/tutorial/tutorial.html) (2022Jun11) creates a simple tic tac toe game in `tic-tac-toe/`
+*Format is as follows: Tutorial URL (date accessed; commit code) short description including the `directory/the/code/is/stored/in/this/repo`*
+
+- [ReactJs.org Intro to React](https://reactjs.org/tutorial/tutorial.html) (2022Jun11; ip3zQ8) creates a simple tic tac toe game in `tic-tac-toe/`
