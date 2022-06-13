@@ -15,8 +15,10 @@ docker build ./ --tag=react
 The run command maps your current directory into the container so you can edit it locally. The current directory should be this repository.
 
 ```
-docker run -dit --publish=80:80  --volume=`pwd`:/app --name=react react:latest
+docker run -dit --publish=80:80 --publish=3000:3000 --volume=`pwd`:/app --name=react react:latest
 ```
+
+### Creating a new React App
 
 To start a new React App in the `example/` directory, run the following command:
 
@@ -26,10 +28,29 @@ docker exec -it react npx create-react-app example
 
 This creates the files both locally and in the docker thanks to the `--volume` command above.
 
+### Test using npm start
+
+The following command lets you start a quick development build/server that you can view on http://localhost:3000.
+
+```
+docker exec -it --workdir="/app/example" react npm start
+```
+
+After you make changes, just refresh the page to see them!
+
+NOTE: You will only see your app as long as the command is running. I recommend running this command in a separate terminal window and just leaving it to run while you learn :-)
+
+### Test production build
+
 To test building with apache deployment, you will want to run the build command and then symbolically link the built code to the apache directory: `/usr/local/apache2/htdocs`. Here are the commands for an app following the pattern initiated by create-react-app.
 
 ```
 docker exec -it --workdir="/app/example" react npm run build
+```
+
+Note: The first time you do this for a given app, you will want to run the following:
+
+```
 docker exec -it --workdir="/usr/local/apache2" react rm -r htdocs
 docker exec -it --workdir="/usr/local/apache2" react ln -s /app/example/build htdocs
 ```
